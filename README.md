@@ -6,8 +6,6 @@ The goal is to generate aggregated insights on the number of breweries per type 
 # Project Architecture
 <img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/509a1a6c-ac64-4de7-831d-9320cbb0638b" />
 
-
-
 # Medallion Architecture
 - Bronze Layer: Raw data extraction from the API and storage in Json format.
 - Camada Silver: Data cleaning, structuring for analysis, adding control columns.
@@ -29,7 +27,8 @@ The goal is to generate aggregated insights on the number of breweries per type 
 # Steps
 1. Docker Environment Setup:
    - Launch Apache Airflow and Jupyter Notebook containers for orchestrating and developing the ETL process.
-   - # COLOCAR UMA IMAGEM
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/4b2834a3-7d25-4cba-83f9-fda85562aded" />
+<img width="1200" height="500" alt="image" src="https://github.com/user-attachments/assets/ac3b4120-ee8b-492b-9431-f4f8aa75c233" />
 
 2. Bronze Layer:
    - Extract raw brewery data from the API and store it in Parquet format.
