@@ -1,40 +1,56 @@
 # Descrição
-Este projeto consiste em extrair dados sobre cervejarias nos EUA e Irlanda usando uma API como uma lista de cervejarias, processando-a em diferentes níveis (Bronze, Silver e Gold), usando Databricks e orquestrando o fluxo de dados com o Azure Data Factory. \
+This project consists of extracting brewery data from the USA and Ireland using the Breweries API, processing it through a Medallion Architecture (Bronze, Silver, Gold), and orchestrating the entire workflow using Apache Airflow.\
 
-O objetivo é criar uma visualização com a quantidade de cervejarias por tipo e localização.
+The goal is to generate aggregated insights on the number of breweries per type and location, storing the results in a SQLite database and validating them via DBeaver.
 
-# Arquitetura do Projeto
-<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/b3d66219-0328-4ff7-a4f2-1f026c43e1e4" />
+# Project Architecture
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/509a1a6c-ac64-4de7-831d-9320cbb0638b" />
 
 
-# O projeto utiliza arquitetura medalhão:
-- Camada Bronze: Extração de dados brutos em formato Parquet/Delta. \
-- Camada Silver: Limpeza e estruturação de dados para análise, criação de comentários, criação de colunas de controle e otimização de tabelas. \
-- Camada Gold: Agregação de dados para insights de alto nível, criação de comentários, criação de colunas de controle e otimização de tabelas.
 
-# Tecnologias utilizadas
-- Databricks: Para processamento e análise de dados usando PySpark. \
-- Azure Data Factory: Para orquestração de fluxo de trabalho de dados. \
-- Azure Key Vault: Para proteger o gerenciamento de chaves de recursos. \
-- Breweries API: Fonte de dados sobre as cervejarias.
+# Medallion Architecture
+- Bronze Layer: Raw data extraction from the API and storage in Json format.
+- Camada Silver: Data cleaning, structuring for analysis, adding control columns.
+- Camada Gold: Data aggregation for high-level insights, grouped by brewery type and location.
 
-# Pré-requisitos
-- Conta da Azure com acesso ao Databricks, Azure Data Factory e Azure Key Vault.
+# Technologies Used
+- Local Cluster: Used for big data processing with PySpark. (Simulates a real big data environment and could be easily replaced by AWS EMR or Databricks.)
+- Docker: Containerized environment to run Apache Airflow and Jupyter Notebook locally for development.
+- Apache Airflow: Workflow orchestration tool to schedule and manage ETL pipelines.
+- PySpark: Distributed data processing engine for transformations across Bronze, Silver, and Gold layers.
+- Breweries API: Public API providing brewery details.
+- DBeaver: Database tool for visually inspecting the processed SQLite database.
 
-# Etapas
-1. Criação de grupos de recursos:
-   - Crie todos os grupos de recursos e recursos necessários para o desenvolvimento do projeto
+# Prerequisites
+- Docker installed and configured.
+- Python 3.x with PySpark and Airflow dependencies.
+- DBeaver (optional, for data visualization after processing).
 
-2. Configuração do Azure Key Vault:
-   - Armazene suas chaves no Azure Key Vault para dar acesso aos aplicativos.
+# Steps
+1. Docker Environment Setup:
+   - Launch Apache Airflow and Jupyter Notebook containers for orchestrating and developing the ETL process.
+   - # COLOCAR UMA IMAGEM
 
-3. Databricks:
-   - Desenvolvimento de notebooks para o workspace Databricks aplicando extração, limpeza e agregação de dados. Como a ingestão de dados foi feita diretamente pelo Azure Data Factory e transformada em formato Parquet, os dados foram carregados na camada bronze e processados na camada silver e posteriormente na camada gold.
-       - Silver_Breweries: 
-       - Gold_Breweries:
-
-4. Azure Data Factory:
-   - Criação de Linked Service para acessar o Databricks, o DataLake Gen2 e a API:
+2. Bronze Layer:
+   - Extract raw brewery data from the API and store it in Parquet format.
+   - # COLOCAR UMA IMAGEM
   
-   - Configure os pipelines para orquestrar a execução dos notebooks no Databricks na ordem Old_Files -> Copy_Data -> Silver -> Gold.
+   - 
+3. Silver Layer:
+   - Clean, normalize, and deduplicate data; add location fields and processing dates.
+   - # COLOCAR UMA IMAGEM
+  
+   
+4. Gold Layer:
+   - Aggregate brewery counts by type and location.
+  - # COLOCAR UMA IMAGEM
+  
+5. Database Load:
+   - Save the final aggregated dataset into a SQLite database.
+  - # COLOCAR UMA IMAGEM
+
+7. Validation in DBeaver:
+   - Connect to the SQLite database and explore the results interactively.
+  - # COLOCAR UMA IMAGEM
+
    - Criei Old_files para automatizar a exclusão de arquivos antigos na camada bronze assim que um novo for gerado.
