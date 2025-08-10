@@ -37,11 +37,11 @@ The goal is to generate aggregated views on the number of breweries by type and 
 
 3. Silver Layer:
    - Clean, normalize, and deduplicate data; add location fields and processing dates, and save in Parquet format.
-<img width="600" height="420" alt="image" src="https://github.com/user-attachments/assets/5e5031da-8647-42e2-b179-28f933efbfeb" />
+<img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/a4d815e1-0cbb-4895-9004-6ee6b8296d1a" />
 
 4. Gold Layer:
    - Aggregate brewery counts by type and location.
-<img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/989eb30b-e6fa-4b2d-810d-c098ea96db9b" />
+<img width="600" height="540" alt="image" src="https://github.com/user-attachments/assets/034fd23b-ff35-4a22-b085-d7e7ce687ee8" />
 
 5. Database Load:
    - Save the final aggregated dataset into a SQLite database.
@@ -49,4 +49,4 @@ The goal is to generate aggregated views on the number of breweries by type and 
 
 7. Validation in DBeaver:
    - Connect to the SQLite database and explore the results interactively.
-<img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/32228086-23fe-4ad7-a84d-5298b6754c41" />
+<img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/cd3b634a-27e9-465f-993c-22bb8e6089f9" />
