@@ -1,4 +1,4 @@
-# Descrição
+# Description
 This project consists of extracting brewery data using the Breweries API, processing it through a Medallion Architecture (Bronze, Silver, Gold), and orchestrating the entire workflow using Apache Airflow.
 
 The goal is to generate aggregated insights on the number of breweries per type and location, storing the results in a SQLite database and validating them via DBeaver.
