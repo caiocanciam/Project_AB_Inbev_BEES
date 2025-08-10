@@ -65,8 +65,7 @@ Para garantir a confiabilidade e a visibilidade do pipeline, adotaria uma estrat
   - Conferir se colunas críticas (id, state, brewery_type) não contêm valores nulos ou inválidos.
   - Validar consistência no particionamento por estado.
   - Interromper o pipeline caso os checks críticos falhem, evitando propagação de dados inválidos para a camada gold.
-- Sugestão:
-  - Criar tarefas extras no DAG que executem testes de qualidade usando Great Expectations ou scripts PySpark/Pandas (data reports) antes de prosseguir para as próximas camadas.
+  - Criar tarefas extras no DAG que executem testes de qualidade usando scripts PySpark/Pandas (data reports) antes de prosseguir para as próximas camadas.
 
 3. Observabilidade e Logging
 - Logs estruturados: Aproveitar os logs do Airflow, com mensagens claras sobre início, fim e possíveis erros de cada etapa.
