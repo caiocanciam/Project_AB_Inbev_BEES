@@ -50,3 +50,31 @@ The goal is to generate aggregated views on the number of breweries by type and 
 7. Validation in DBeaver:
    - Connect to the SQLite database and explore the results interactively.
 <img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/cd3b634a-27e9-465f-993c-22bb8e6089f9" />
+
+# Monitoring and Alerting
+To ensure the pipeline’s reliability and visibility, I would adopt a monitoring and alerting strategy in three layers:
+
+1. Pipeline Monitoring (Airflow)
+- Execution metrics: Use Airflow’s native UI to track task duration, retry attempts, and success/failure status.
+- Failure alerts: Configure email notifications or integrate with Slack/MS Teams to notify when a DAG or task fails.
+- Automatic retries: Already implemented in the DAG (2 attempts with delay between them), minimizing temporary failures such as API unavailability.
+
+2. Data Quality Monitoring
+- Validations in Silver and Gold layers:
+  - Check processed volumes and compare against historical averages.
+  - Ensure critical columns (id, state, brewery_type) have no null or invalid values.
+  - Validate partitioning consistency by state.
+  - Action on failure: Stop the pipeline if critical checks fail, preventing invalid data from propagating to the Gold layer.
+- Suggestion:
+  - Create additional tasks in the DAG to run quality checks using Great Expectations or PySpark/Pandas scripts (data reports) before proceeding to the next layers.
+
+3. Observability and Logging
+- Structured logs: Leverage Airflow logs with clear messages on start, end, and any errors in each step.
+- Log storage: Persist logs on durable volumes or send them to a centralized logging service (e.g., CloudWatch, Grafana) for historical review.
+- Dashboards: Use Grafana to visualize metrics such as average execution time, number of failures, and volume of data processed per day.
+
+# Incidents Alert Workflow
+- Failure is logged in Airflow.
+- An automatic alert is sent (email).
+- The data team receives the notification and accesses Airflow logs to identify the root cause.
+- If the issue is data-related (e.g., API returning an empty list), apply manual reprocessing logic (through an Airflow environment variable) or adjust the code.
