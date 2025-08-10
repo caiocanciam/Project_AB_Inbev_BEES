@@ -1,6 +1,7 @@
 import pytz
 import os
 import json
+import pandas as pd
 
 from datetime import datetime
 
@@ -39,16 +40,49 @@ def silver_layer():
     # Create location column (city or state_province)
     df_silver = df_spark.withColumn(
         "brewery_location",
-        coalesce(col("city"), col("state_province"))
+        coalesce(col("state"), col("state_province"))
     )
-    
-    # Remove duplicates by brewery ID
-    df_silver = df_silver.dropDuplicates(["id"])
     
     # Add execution date column
     date = str(datetime.now(pytz.timezone("Brazil/East"))).split(" ")[0]
     df_silver = df_silver.withColumn("exec_date", F.to_date(F.lit(date)))
     
+    # Validation
+    check_brewery_type = df_silver.where("brewery_type is NULL")
+    check_brewery_location = df_silver.where("brewery_location is NULL")
+
+    check_fail = []
+    check_dict = {}
+
+    if check_brewery_type.count() > 0:
+        check_fail.append("brewery_type")
+        check_dict["brewery_type"] = check_brewery_type.toPandas()
+        check_dict["unique_brewery_type"] = (
+            check_brewery_type.select("id").distinct().toPandas()
+        )
+    
+    if check_brewery_location.count() > 0:
+        check_fail.append("brewery_location")
+        check_dict["brewery_location"] = check_brewery_location.toPandas()
+        check_dict["unique_brewery_location"] = (
+            check_brewery_location.select("id", "address_1", "address_2", "address_3", "city").distinct().toPandas()
+        )
+
+    if len(check_fail) > 0:
+        local_folder_path = "/opt/airflow/layers/data_report/"
+        file_name = "data_report.xlsx"
+        os.makedirs(local_folder_path, exist_ok=True)
+
+        full_path = os.path.join(local_folder_path, file_name)
+
+        with pd.ExcelWriter(full_path, engine="openpyxl") as writer:
+            for sheet_name, df in check_dict.items():
+                df.to_excel(writer, sheet_name=sheet_name, index=False)
+
+        raise Exception(
+            f"Validation failed for {', '.join(check_fail)}. Excel report generated at: {full_path}"
+        )
+
     # Save silver layer, partitioned by location
     df_silver.write \
         .mode("overwrite") \

@@ -20,11 +20,8 @@ def gold_layer():
     # Ensure location column is filled
     df_gold = df_input.withColumn(
         "brewery_location",
-        F.coalesce(F.col("city"), F.col("state_province"), F.col("state"))
+        F.coalesce(F.col("state"), F.col("state_province"))
     )
-    
-    # Fill missing values
-    df_gold = df_gold.fillna({"brewery_location": "UNKNOWN", "brewery_type": "UNKNOWN"})
     
     # Remove duplicates
     df_gold = df_gold.dropDuplicates(["id"])
