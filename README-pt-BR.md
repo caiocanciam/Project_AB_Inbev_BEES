@@ -51,3 +51,30 @@ O objetivo é gerar visões agregadas sobre a quantidade de cervejarias por tipo
    - Conectar ao banco SQLite e explorar os resultados de forma interativa.
 <img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/cd3b634a-27e9-465f-993c-22bb8e6089f9" />
 
+# Monitoramento e Alertas
+Para garantir a confiabilidade e a visibilidade do pipeline, adotaria uma estratégia de monitoramento e alertas em três níveis:
+
+1. Monitoramento de Pipeline (Airflow)
+- Métricas de execução: Utilizar o painel nativo do Airflow para acompanhar duração das tarefas, tentativas de reexecução e status de sucesso/falha.
+- Alertas por falha: Configuração de e-mails ou integração com Slack/MS Teams para notificar quando uma DAG ou tarefa falhar.
+- Retries automáticos: Já implementados no DAG (2 tentativas com intervalo entre elas), minimizando falhas temporárias como indisponibilidade da API.
+
+2. Monitoramento de Qualidade de Dados
+- Validações no Silver e Gold:
+  - Checagem de volumes processados e comparação com médias históricas.
+  - Conferir se colunas críticas (id, state, brewery_type) não contêm valores nulos ou inválidos.
+  - Validar consistência no particionamento por estado.
+  - Interromper o pipeline caso os checks críticos falhem, evitando propagação de dados inválidos para a camada gold.
+- Sugestão:
+  - Criar tarefas extras no DAG que executem testes de qualidade usando Great Expectations ou scripts PySpark/Pandas (data reports) antes de prosseguir para as próximas camadas.
+
+3. Observabilidade e Logging
+- Logs estruturados: Aproveitar os logs do Airflow, com mensagens claras sobre início, fim e possíveis erros de cada etapa.
+- Armazenamento de logs: Salvar logs em volumes persistentes ou enviar para um serviço de log centralizado (ex.: CloudWatch, Grafana) para consulta histórica.
+- Dashboards: Utilizar Grafana para visualizar métricas como tempo médio de execução, número de falhas e volume de dados processados por dia.
+
+4. Fluxo de Alerta em Caso de Problema
+- Falha é registrada no Airflow.
+- Alerta é enviado automaticamente (e-mail).
+- Equipe de dados recebe notificação e acessa logs no Airflow para identificar a causa.
+- Se o problema for de dados (ex.: API retornando lista vazia), aplicar lógica de reprocessamento manual (em variável de ambiente no Airflow) ou ajuste de código.
