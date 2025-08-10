@@ -1,5 +1,5 @@
 # Descrição
-This project consists of extracting brewery data from the USA and Ireland using the Breweries API, processing it through a Medallion Architecture (Bronze, Silver, Gold), and orchestrating the entire workflow using Apache Airflow.
+This project consists of extracting brewery data using the Breweries API, processing it through a Medallion Architecture (Bronze, Silver, Gold), and orchestrating the entire workflow using Apache Airflow.
 
 The goal is to generate aggregated insights on the number of breweries per type and location, storing the results in a SQLite database and validating them via DBeaver.
 
@@ -8,8 +8,8 @@ The goal is to generate aggregated insights on the number of breweries per type 
 
 # Medallion Architecture
 - Bronze Layer: Raw data extraction from the API and storage in Json format.
-- Camada Silver: Data cleaning, structuring for analysis, adding control columns.
-- Camada Gold: Data aggregation for high-level insights, grouped by brewery type and location.
+- Silver Layer: Data cleaning, structuring for analysis, adding control columns.
+- Gold Layer: Data aggregation for high-level insights, grouped by brewery type and location.
 
 # Technologies Used
 - Local Cluster: Used for data processing with PySpark. (Simulates a real big data environment and could be easily replaced by AWS EMR or Databricks.)
@@ -31,11 +31,11 @@ The goal is to generate aggregated insights on the number of breweries per type 
 <img width="1200" height="500" alt="image" src="https://github.com/user-attachments/assets/ac3b4120-ee8b-492b-9431-f4f8aa75c233" />
 
 2. Bronze Layer:
-   - Extract raw brewery data from the API and store it in Parquet format.
+   - Extract raw brewery data from the API and store it in Json format.
 <img width="726" height="249" alt="image" src="https://github.com/user-attachments/assets/079d6ed7-8090-4328-81e2-80b38b78e873" />
 
 3. Silver Layer:
-   - Clean, normalize, and deduplicate data; add location fields and processing dates.
+   - Clean, normalize, and deduplicate data; add location fields, processing dates and save in Parquet format.
 <img width="600" height="420" alt="image" src="https://github.com/user-attachments/assets/5e5031da-8647-42e2-b179-28f933efbfeb" />
 
 4. Gold Layer:
