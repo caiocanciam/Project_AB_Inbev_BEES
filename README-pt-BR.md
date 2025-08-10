@@ -1,5 +1,5 @@
 # Descrição
-Este projeto consiste em extrair dados de cervejarias dos EUA e da Irlanda utilizando a Breweries API, processando-os por meio de uma Arquitetura Medalhão (Bronze, Silver, Gold) e orquestrando todo o fluxo de trabalho com Apache Airflow.
+Este projeto consiste em extrair dados de cervejarias utilizando a Breweries API, processando-os por meio de uma Arquitetura Medalhão (Bronze, Silver, Gold) e orquestrando todo o fluxo de trabalho com Apache Airflow.
 
 O objetivo é gerar visões agregadas sobre a quantidade de cervejarias por tipo e localização, armazenando os resultados em um banco de dados SQLite e validando-os via DBeaver.
 
