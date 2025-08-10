@@ -65,8 +65,7 @@ To ensure the pipeline’s reliability and visibility, I would adopt a monitorin
   - Ensure critical columns (id, state, brewery_type) have no null or invalid values.
   - Validate partitioning consistency by state.
   - Action on failure: Stop the pipeline if critical checks fail, preventing invalid data from propagating to the Gold layer.
-- Suggestion:
-  - Create additional tasks in the DAG to run quality checks using Great Expectations or PySpark/Pandas scripts (data reports) before proceeding to the next layers.
+  - Create additional tasks in the DAG to run quality checks using PySpark/Pandas scripts (data reports) before proceeding to the next layers.
 
 3. Observability and Logging
 - Structured logs: Leverage Airflow logs with clear messages on start, end, and any errors in each step.
