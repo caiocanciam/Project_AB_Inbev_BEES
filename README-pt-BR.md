@@ -73,7 +73,7 @@ Para garantir a confiabilidade e a visibilidade do pipeline, adotaria uma estrat
 - Armazenamento de logs: Salvar logs em volumes persistentes ou enviar para um serviço de log centralizado (ex.: CloudWatch, Grafana) para consulta histórica.
 - Dashboards: Utilizar Grafana para visualizar métricas como tempo médio de execução, número de falhas e volume de dados processados por dia.
 
-4. Fluxo de Alerta em Caso de Problema
+# Fluxo de Alerta em Caso de Problemas
 - Falha é registrada no Airflow.
 - Alerta é enviado automaticamente (e-mail).
 - Equipe de dados recebe notificação e acessa logs no Airflow para identificar a causa.
