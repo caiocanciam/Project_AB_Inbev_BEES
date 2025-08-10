@@ -4,7 +4,7 @@ Este projeto consiste em extrair dados de cervejarias dos EUA e da Irlanda utili
 O objetivo é gerar visões agregadas sobre a quantidade de cervejarias por tipo e localização, armazenando os resultados em um banco de dados SQLite e validando-os via DBeaver.
 
 # Arquitetura do Projeto
-<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/509a1a6c-ac64-4de7-831d-9320cbb0638b" />
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/d0797a5f-743f-4d1f-ad81-08fe0d7b2620" />
 
 # Arquitetura Medalhão
 - Camada Bronze: Extração de dados brutos da API e armazenamento no formato JSON.
