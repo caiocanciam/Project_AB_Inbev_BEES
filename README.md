@@ -1,5 +1,5 @@
 # Descrição
-This project consists of extracting brewery data from the USA and Ireland using the Breweries API, processing it through a Medallion Architecture (Bronze, Silver, Gold), and orchestrating the entire workflow using Apache Airflow.\
+This project consists of extracting brewery data from the USA and Ireland using the Breweries API, processing it through a Medallion Architecture (Bronze, Silver, Gold), and orchestrating the entire workflow using Apache Airflow.
 
 The goal is to generate aggregated insights on the number of breweries per type and location, storing the results in a SQLite database and validating them via DBeaver.
 
@@ -12,7 +12,7 @@ The goal is to generate aggregated insights on the number of breweries per type 
 - Camada Gold: Data aggregation for high-level insights, grouped by brewery type and location.
 
 # Technologies Used
-- Local Cluster: Used for big data processing with PySpark. (Simulates a real big data environment and could be easily replaced by AWS EMR or Databricks.)
+- Local Cluster: Used for data processing with PySpark. (Simulates a real big data environment and could be easily replaced by AWS EMR or Databricks.)
 - Docker: Containerized environment to run Apache Airflow and Jupyter Notebook locally for development.
 - Apache Airflow: Workflow orchestration tool to schedule and manage ETL pipelines.
 - PySpark: Distributed data processing engine for transformations across Bronze, Silver, and Gold layers.
@@ -27,29 +27,25 @@ The goal is to generate aggregated insights on the number of breweries per type 
 # Steps
 1. Docker Environment Setup:
    - Launch Apache Airflow and Jupyter Notebook containers for orchestrating and developing the ETL process.
-<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/4b2834a3-7d25-4cba-83f9-fda85562aded" />
+<img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/4b2834a3-7d25-4cba-83f9-fda85562aded" />\
 <img width="1200" height="500" alt="image" src="https://github.com/user-attachments/assets/ac3b4120-ee8b-492b-9431-f4f8aa75c233" />
 
 2. Bronze Layer:
    - Extract raw brewery data from the API and store it in Parquet format.
-   - # COLOCAR UMA IMAGEM
-  
-   - 
+<img width="726" height="249" alt="image" src="https://github.com/user-attachments/assets/079d6ed7-8090-4328-81e2-80b38b78e873" />
+
 3. Silver Layer:
    - Clean, normalize, and deduplicate data; add location fields and processing dates.
-   - # COLOCAR UMA IMAGEM
-  
-   
+<img width="600" height="420" alt="image" src="https://github.com/user-attachments/assets/5e5031da-8647-42e2-b179-28f933efbfeb" />
+
 4. Gold Layer:
    - Aggregate brewery counts by type and location.
-  - # COLOCAR UMA IMAGEM
-  
+<img width="600" height="500" alt="image" src="https://github.com/user-attachments/assets/989eb30b-e6fa-4b2d-810d-c098ea96db9b" />
+
 5. Database Load:
    - Save the final aggregated dataset into a SQLite database.
-  - # COLOCAR UMA IMAGEM
+<img width="721" height="258" alt="image" src="https://github.com/user-attachments/assets/c1bf317a-84e6-4cb8-b951-8e0c8d0e1a0d" />
 
 7. Validation in DBeaver:
    - Connect to the SQLite database and explore the results interactively.
-  - # COLOCAR UMA IMAGEM
-
-   - Criei Old_files para automatizar a exclusão de arquivos antigos na camada bronze assim que um novo for gerado.
+<img width="500" height="600" alt="image" src="https://github.com/user-attachments/assets/32228086-23fe-4ad7-a84d-5298b6754c41" />
