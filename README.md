@@ -22,11 +22,12 @@ The goal is to generate aggregated insights on the number of breweries per type 
 # Prerequisites
 - Docker installed and configured.
 - Python 3.x with PySpark and Airflow dependencies.
-- DBeaver (optional, for data visualization after processing).
+- DBeaver for data visualization after processing.
 
 # Steps
 1. Docker Environment Setup:
    - Launch Apache Airflow and Jupyter Notebook containers for orchestrating and developing the ETL process.
+
 <img width="600" height="400" alt="image" src="https://github.com/user-attachments/assets/4b2834a3-7d25-4cba-83f9-fda85562aded" />\
 <img width="1200" height="500" alt="image" src="https://github.com/user-attachments/assets/ac3b4120-ee8b-492b-9431-f4f8aa75c233" />
 
@@ -35,7 +36,7 @@ The goal is to generate aggregated insights on the number of breweries per type 
 <img width="726" height="249" alt="image" src="https://github.com/user-attachments/assets/079d6ed7-8090-4328-81e2-80b38b78e873" />
 
 3. Silver Layer:
-   - Clean, normalize, and deduplicate data; add location fields, processing dates and save in Parquet format.
+   - Clean, normalize, and deduplicate data; add location fields and processing dates, and save in Parquet format.
 <img width="600" height="420" alt="image" src="https://github.com/user-attachments/assets/5e5031da-8647-42e2-b179-28f933efbfeb" />
 
 4. Gold Layer:
