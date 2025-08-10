@@ -4,7 +4,7 @@ This project consists of extracting brewery data using the Breweries API, proces
 The goal is to generate aggregated insights on the number of breweries per type and location, storing the results in a SQLite database and validating them via DBeaver.
 
 # Project Architecture
-<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/509a1a6c-ac64-4de7-831d-9320cbb0638b" />
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/d0797a5f-743f-4d1f-ad81-08fe0d7b2620" />
 
 # Medallion Architecture
 - Bronze Layer: Raw data extraction from the API and storage in Json format.
